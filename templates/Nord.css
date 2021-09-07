@@ -1,0 +1,40 @@
+body {
+    background-color: #2e3340;
+    color: #d8dee9;
+    font-family: SF Mono
+  }
+  
+  h1 {
+    font-family: Consolas;
+    color: #a3be8c
+  }
+  
+  h2 {
+    font-family: Consolas;
+    color: #88c0d0
+  }
+  
+  h3 {
+    font-family: Consolas;
+    color: #ebcb8b
+  }
+  
+  h4 {
+    font-family: Consolas;
+    color: #BF616A
+  }
+  
+  h5 {
+    font-family: Consolas;
+    color: #D08770
+  }
+
+  h6 {
+    font-family: Consolas;
+    color: #5E81AC
+  }
+  
+  a {
+    font-family: SF Pro Rounded;
+    color: #ECEFF4
+  }

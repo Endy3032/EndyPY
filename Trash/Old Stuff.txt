@@ -1,0 +1,131 @@
+# Bot Info
+@endy.command(aliases = ['endy', 'bot', 'bot_info', 'bot_i', 'info', 'i'])
+async def _endy(ctx):
+  info = discord.Embed(
+    title="Endy Info",
+      description="List Endy's info on the Server!",
+      timestamp = datetime.now(time),
+      colour=0x00ffff
+  )
+  info.add_field(
+    name="Latency",
+    value=f'`{round(endy.latency * 1000)}ms`'
+  )
+  await ctx.send(embed=info)
+
+Complex cogs loading
+paths = []
+
+for root, dirs, files in os.walk('./cogs'):
+	for item in files:
+		paths.append(os.path.join(root,item))
+
+for i in paths:
+  if i[-3:] == '.py':
+    path = Path(i)
+    par = path.parent
+    cogname = os.path.basename(path)[:-3]
+    if str(par) == 'cogs':
+      endy.load_extension(f"cogs.{cogname}")
+    elif 'cogs' in str(par):
+      cogdir = str(par).replace("cogs/", "")
+      endy.load_extension(f"cogs.{cogdir}.{cogname}")
+
+@event
+async def on_member_join(member):
+  msg = discord.Embed(
+    title = 'Welcome',
+    description = f"Hey there {member}!, Welcome to the server!!!\nIf you want to go to my creator's server, use the invite sent below!",
+    timestamp = datetime.now(time),
+    colour = 0xA03CFF
+  )
+  await member.send(embed = msg)
+  await member.send('discord.gg/ymV4HBH')
+
+# Kick & Ban
+endy.has_role('Mod')
+@endy.command()
+async def kick(self, ctx, member : discord.Member, *, reason="Not specified"):
+  await ctx.channel.purge(limit=1)
+  await member.kick(reason=reason)
+  await ctx.send(f"{member.name}#{member.code} has been kicked!")
+  print(f"{member.name}#{member.code} has been kicked!")
+@endy.command()
+async def ban(self, ctx, member : discord.Member, *, reason ="Not specified"):
+  await ctx.channel.purge(limit=1)
+  await member.ban(reason=reason)
+  await ctx.send(f"{member.name}#{member.code} has been banned!")
+  print(f"{member.name}#{member.code} has been unbanned!")
+@endy.command()
+async def unban(self, ctx, *, member):
+  banned_users = await ctx.guild.bans()
+  member_name, member_code = member.split('#')
+  for ban_entry in banned_users:
+    user = ban_entry.user
+    if (user.name, user.code) == (member_name, member_code):
+      await ctx.guild.unban(user)
+      await ctx.send(f"{user.name}#{user.code} has been unbanned!")
+      print(f"{user.name}#{user.code} has been unbanned!")
+
+# Lives
+@endy.command(aliases = ['l'])
+async def lives(self, ctx, user = 'reload', kind = '', amount = ''):
+  fi = open('./cogs/Admin - Lives.txt', 'r')
+  data = fi.read()
+  await ctx.send(data)
+  await ctx.channel.purge(limit = 1)
+  channel = self.client.get_channel(id = 694440828977938473)
+  msg = await channel.fetch_message(id = 735691970881781779)  
+  if ctx.message.author.id == 554680253876928512:
+    if user == 'reload':
+      fi = open('./cogs/Admin - Lives.txt', 'rt')
+      data = fi.read()
+      await msg.edit(content = data)
+      fi.close()
+    else:
+      fi = open('./cogs/Admin - Lives.txt', 'r')
+      for cnt, line in enumerate(fi):
+        if user in line:
+          l = line
+      fi.close()
+      lst = l.split()
+      livename = [':broken_heart:', ':black_heart:', ':white_heart:', ':purple_heart:', ':blue_heart:', ':green_heart:', ':yellow_heart:', ':orange_heart:', ':brown_heart:', ':heart:', ':heartpulse:']
+      if kind == '-':
+        live = livename[livename.index(lst[0]) - int(amount)]
+      elif kind == '+':
+        live = livename[livename.index(lst[0]) + int(amount)]
+      new = f"{live} {lst[1]} {lst[2]} {lst[3]}"
+      fi = open('./cogs/Admin - Lives.txt', 'rt')
+      data = fi.read()
+      data = data.replace(l, f'{new}\n')
+      fi.close()
+      fi = open('./cogs/Admin - Lives.txt', 'w')
+      fi.write(data)
+      await msg.edit(content = data)
+      fi.close()
+
+Order: 💔 🖤 🤍 💜 💙 💚 💛 🧡 🤎 ❤️ 💗
+:heartpulse: (Lvl 0) <@!673498161477713960>
+:heartpulse: (Lvl 0) <@!608655655498285077>
+:heartpulse: (Lvl 0) <@!582609037913358346>
+:heartpulse: (Lvl 1) <@!724119470565490739>
+:heartpulse: (Lvl 1) <@!708322712401215600>
+:heartpulse: (Lvl 3) <@!602101368420958230>
+:heartpulse: (Lvl 4) <@!682871642661060614>
+:heartpulse: (Lvl 5) <@!467525352986509312>
+:heartpulse: (Lvl 6) <@!681683849540796475>
+:heartpulse: (Lvl 6) <@!699984151356637224>
+:heartpulse: (Lvl 7) <@!696663133866950666>
+:heartpulse: (Lvl 8) <@!682856694526509072>
+:yellow_heart: (Lvl 8) <@!676844700384100352>
+:orange_heart: (Lvl 10) <@!631814654083203096>
+:heartpulse: (Lvl 12) <@!678506360106909706>
+:heartpulse: (Lvl 16 / 8) <@!520162303216320522> / <@!714074453251981343>
+:heartpulse: (Lvl 15) <@!667022127991357481>
+:heartpulse: (Lvl 16) <@!548080460950142976>
+:heart: (Lvl 16) <@!695926046960255007>
+:heartpulse: (Lvl 20) <@!540539332688216068>
+:heartpulse: (Lvl 29) <@!608876620417335337>
+:sparkling_heart: (Lvl 38) <@!554680253876928512>
+
+Leaderboard: https://mee6.xyz/leaderboard/5546849286845890651

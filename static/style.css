@@ -1,0 +1,68 @@
+body {color:dodgerblue;}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+  .theme-light {
+    --color-primary: #0060df;
+    --color-secondary: #fbfbfe;
+    --color-accent: #fd6f53;
+    --font-color: #000000;
+  }
+  .theme-dark {
+    --color-primary: #17ed90;
+    --color-secondary: #243133;
+    --color-accent: #12cdea;
+    --font-color: #ffffff;
+  }
+  .theme-nord {
+    --color-primary: #2e3440;
+    --color-secondary: #5e81ac;
+    --color-accent: #88c0d0;
+    --font-color: #d8dee9;
+  }
+  .theme-communism {
+    --color-primary: #ff0000;
+    --color-secondary: #aa0000;
+    --color-accent: #aaaa00;
+    --font-color: #ffff00;
+  }
+  .container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: var(--color-secondary);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .container h1 {
+    color: var(--font-color);
+  }
+  .container h2 {
+    color: var(--h2-color)
+  }
+  .container h3 {
+    color: var(--h3-color)
+  }
+  .container h4 {
+    color: var(--h4-color)
+  }
+  .container h5 {
+    color: var(--h5-color)
+  }
+  .container h6 {
+    color: var(--h6-color)
+  }
+  .container a {
+    color: var(--a-color)
+  }
+  .container button {
+    color: var(--font-color);
+    background: var(--color-primary);
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 5px;
+  }
